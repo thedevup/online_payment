@@ -5,12 +5,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.preprocessing import StandardScaler
 
 # Loading the csv file
 df = pd.read_csv('../fin_data.csv')
 
 # Exploring the fin_data
-print(df.head)
+print(df.head())
 
 # Check the shape of the dataset
 print(df.shape)
@@ -28,7 +29,7 @@ print(df2.head())
 df = df.join(df2[['type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT', 'type_TRANSFER']])
 
 # Drop the columns we are not interested in
-df.drop(['nameOrig', 'nameDest', 'type'], axis=1, inplace=True)
+df.drop(['nameOrig', 'nameDest', 'type', 'isFlaggedFraud'], axis=1, inplace=True)
 
 # The shape of the dataset after feature engineering and dropping the unecessary features
 print(df.shape)
@@ -36,8 +37,12 @@ print(df.shape)
 # Correlation matrix
 print(df.corr())
 
-# scalling?
-
+# Feature scaling for continuous features
+'''
+columns_to_scale = ['step', 'amount', 'oldbalanceOrg', 'newbalanceOrig', 'oldbalanceDest', 'newbalanceDest']
+scaler = StandardScaler()
+df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
+'''
 
 # Loadthe dependent and undependent varialbles
 X = df.drop('isFraud',axis=1)
@@ -65,10 +70,10 @@ print(Y_pred_nb)
 # print(classification_report(Y_test,Y_pred_knn))
 
 # knn accuracy score
-print("knn score: ", accuracy_score(Y_test,Y_pred_knn))
+print("knn accuracy score: ", accuracy_score(Y_test,Y_pred_knn))
 
 # Calculate the accyracy for NB
 # print(classification_report(Y_test,Y_pred_nb))
 
 # NB accuracy score
-print("knn score: ", accuracy_score(Y_test,Y_pred_nb))
+print("nb accuracy score: ", accuracy_score(Y_test,Y_pred_nb))
