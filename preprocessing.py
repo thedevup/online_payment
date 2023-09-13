@@ -1,6 +1,7 @@
 # Import the necessary libraries
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
@@ -34,8 +35,11 @@ df.drop(['nameOrig', 'nameDest', 'type', 'isFlaggedFraud'], axis=1, inplace=True
 # The shape of the dataset after feature engineering and dropping the unecessary features
 print(df.shape)
 
-# Correlation matrix
-print(df.corr())
+# Visual correlation matrix
+plt.figure(figsize=(12, 8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm', vmin=-1, vmax=1)
+plt.title('Correlation Matrix')
+plt.show()
 
 # Feature scaling for continuous features
 '''
