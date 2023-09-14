@@ -71,13 +71,13 @@ Y_pred_nb = nb.fit(X_train, Y_train).predict(X_test)
 print(Y_pred_nb)
 
 # Calculate the accyracy for knn
-# print(classification_report(Y_test,Y_pred_knn))
+print(classification_report(Y_test,Y_pred_knn))
 
 # knn accuracy score
 print("knn accuracy score: ", accuracy_score(Y_test,Y_pred_knn))
 
 # Calculate the accyracy for NB
-# print(classification_report(Y_test,Y_pred_nb))
+print(classification_report(Y_test,Y_pred_nb))
 
 # NB accuracy score
 print("nb accuracy score: ", accuracy_score(Y_test,Y_pred_nb))
