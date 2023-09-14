@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, classification_report
-from sklearn.preprocessing import StandardScaler
 
 # Loading the csv file
 df = pd.read_csv('../fin_data.csv')
@@ -35,18 +34,19 @@ df.drop(['nameOrig', 'nameDest', 'type', 'isFlaggedFraud'], axis=1, inplace=True
 # The shape of the dataset after feature engineering and dropping the unecessary features
 print(df.shape)
 
+# Check if the target variable is balanced
+print(df['isFraud'].value_counts())
+
+# Matrix of histograms
+df.hist(figsize=(12, 8))
+plt.tight_layout()  # ensures that the plots do not overlap
+plt.show()
+
 # Visual correlation matrix
 plt.figure(figsize=(12, 8))
 sns.heatmap(df.corr(), annot=True, cmap='coolwarm', vmin=-1, vmax=1)
-plt.title('Correlation Matrix')
+plt.title('Correlation matrix')
 plt.show()
-
-# Feature scaling for continuous features
-'''
-columns_to_scale = ['step', 'amount', 'oldbalanceOrg', 'newbalanceOrig', 'oldbalanceDest', 'newbalanceDest']
-scaler = StandardScaler()
-df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
-'''
 
 # Loadthe dependent and undependent varialbles
 X = df.drop('isFraud',axis=1)
