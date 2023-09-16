@@ -16,6 +16,8 @@ print(df.head())
 # Check the shape of the dataset
 print(df.shape)
 
+print(df.describe())
+
 # Show the comulmnsand data types
 print(df.info())
 
@@ -53,7 +55,7 @@ X = df.drop('isFraud',axis=1)
 Y = df['isFraud']
 
 # Splitting the data into training and testing sets
-X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.30,random_state=1)
+X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.30)
 
 # Create the KNN model
 knn = KNeighborsClassifier(n_neighbors=6)
