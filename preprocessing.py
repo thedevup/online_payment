@@ -1,4 +1,3 @@
-# Import the necessary libraries
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -10,12 +9,13 @@ from sklearn.metrics import accuracy_score, classification_report
 # Loading the csv file
 df = pd.read_csv('../fin_data.csv')
 
-# Exploring the fin_data
+# Exploring the dataset
 print(df.head())
 
 # Check the shape of the dataset
 print(df.shape)
 
+# Get the statistical summary
 print(df.describe())
 
 # Show the comulmnsand data types
@@ -33,7 +33,7 @@ df = df.join(df2[['type_CASH_IN', 'type_CASH_OUT', 'type_DEBIT', 'type_PAYMENT',
 # Drop the columns we are not interested in
 df.drop(['nameOrig', 'nameDest', 'type', 'isFlaggedFraud'], axis=1, inplace=True)
 
-# The shape of the dataset after feature engineering and dropping the unecessary features
+# The shape of the dataset after dropping the unecessary features
 print(df.shape)
 
 # Check if the target variable is balanced
